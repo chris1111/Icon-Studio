@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avatar-Icon-Studio</title>
+<title>Icon-Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <style>
@@ -743,11 +743,11 @@
 
 <div class="app-container">
   <header class="header">
-    <h1>Avatar-Icon-Studio</h1>
-    <a class="action-btn btn-primary" href="https://github.com/chris1111/Avatar-Icon-Studio" target="_blank" style="display:inline-flex; width: auto; margin-top: 10px;">
+    <h1>Icon-Studio</h1>
+    <a class="action-btn btn-primary" href="https://github.com/chris1111/Icon-Studio" target="_blank" style="display:inline-flex; width: auto; margin-top: 10px;">
       <i class="fab fa-github"></i> View on Github
     </a>
-    <p>Create your unique avatar or icon with custom shapes, rings, and effects</p>
+    <p>Create your unique icon or avatar with custom shapes, rings, and effects</p>
     <p><small>Copyright © 2026 chris1111 , All Rights Reserved.</small></p>
   </header>
 
@@ -1243,12 +1243,12 @@
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'avatar-' + size + 'x' + size + '.png';
+        a.download = 'Image-' + size + 'x' + size + '.png';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('Avatar downloaded (' + size + 'x' + size + 'px)');
+        showToast('Icon downloaded (' + size + 'x' + size + 'px)');
       }, 'image/png');
     } catch (e) {
       showToast('Download failed — cross-origin image restriction. Try uploading the image first.');
