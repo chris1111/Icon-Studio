@@ -80,66 +80,80 @@
     100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
   }
 
+  /* --- Layout Adjustments --- */
   .app-container {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 16px 24px; /* Reduced top/bottom padding */
     min-height: 100vh;
   }
 
   .header {
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 12px; /* Reduced margin */
   }
 
   .header h1 {
     font-family: 'Cinzel', serif;
     font-weight: 900;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.5rem, 4vw, 2.2rem); /* Smaller header text */
     background: linear-gradient(135deg, var(--ice), var(--accent), var(--accent2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 0.04em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     text-shadow: 0 0 30px rgba(78, 200, 240, 0.3);
   }
 
   .header p {
     color: var(--muted);
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     font-weight: 300;
     letter-spacing: 0.02em;
-    margin-top: 10px;
+    margin-top: 4px;
   }
 
-  .main-grid {
+  /* --- 3-COLUMN GRID LAYOUT --- */
+  .main-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 280px 1fr 1fr; /* Slightly narrower left column */
+    gap: 16px; /* Reduced gap */
     align-items: start;
   }
-
-  @media (max-width: 800px) {
-    .main-grid { grid-template-columns: 1fr; }
+  
+  @media (max-width: 1000px) {
+    .main-layout {
+      grid-template-columns: 1fr;
+    }
   }
 
   .preview-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 16px; /* Reduced gap */
   }
 
   .avatar-stage {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: 220px; /* Shrunk slightly */
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 160px; /* Shrunk slightly */
+    height: 160px;
+    overflow: hidden;
+    transition: border-radius 0.5s ease, clip-path 0.5s ease, transform 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
   }
 
   .avatar-glow {
@@ -164,16 +178,6 @@
     transition: all 0.5s ease;
     z-index: 1;
     filter: drop-shadow(0 0 8px rgba(78, 200, 240, 0.4));
-  }
-
-  .avatar-container {
-    position: relative;
-    width: 240px;
-    height: 240px;
-    overflow: hidden;
-    transition: border-radius 0.5s ease, clip-path 0.5s ease, transform 0.3s ease;
-    cursor: pointer;
-    z-index: 2;
   }
 
   .avatar-container:hover {
@@ -247,20 +251,20 @@
     align-items: flex-end;
     gap: 20px;
     justify-content: center;
-    padding: 24px;
+    padding: 14px; /* Reduced padding */
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
     backdrop-filter: blur(12px);
     width: 100%;
-    max-width: 400px;
+    max-width: 260px;
   }
 
   .size-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
 
   .size-item .mini-avatar {
@@ -283,19 +287,20 @@
     font-weight: 600;
   }
 
-  .controls-panel {
+  .controls-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 14px; /* Reduced gap */
   }
 
   .control-card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 14px;
+    padding: 16px; /* Reduced padding */
     backdrop-filter: blur(12px);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
   }
 
   .control-card:hover {
@@ -305,34 +310,34 @@
 
   .control-card h3 {
     font-family: 'Cinzel', serif;
-    font-size: 1.05rem;
+    font-size: 0.95rem; /* Smaller font */
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 10px; /* Reduced margin */
     color: var(--ice);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .control-card h3 i {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.7;
   }
 
   .option-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px; /* Reduced gap */
   }
 
   .option-btn {
-    padding: 8px 16px;
-    border-radius: 10px;
+    padding: 6px 12px; /* Reduced padding */
+    border-radius: 8px;
     border: 1px solid var(--border);
     background: rgba(78, 200, 240, 0.05);
     color: var(--fg);
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.8rem; /* Smaller font */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -370,8 +375,8 @@
   }
 
   .shape-preview {
-    width: 28px;
-    height: 28px;
+    width: 24px; /* Smaller preview */
+    height: 24px;
     background: linear-gradient(135deg, var(--ice), var(--accent));
     display: inline-block;
     vertical-align: middle;
@@ -387,8 +392,8 @@
   .shape-preview.sp-ios { border-radius: 22%; }
 
   .ring-color-dot {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
@@ -410,9 +415,9 @@
   .rcd-plasma { background: conic-gradient(#ff00cc, #3333ff, #00ffff, #ff00cc); }
 
   .bg-color-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     border: 2px solid transparent;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -482,25 +487,27 @@
 
   .action-row {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 260px;
   }
 
   .action-btn {
     flex: 1;
-    min-width: 110px;
-    padding: 14px 20px;
-    border-radius: 12px;
+    min-width: 70px;
+    padding: 10px 12px;
+    border-radius: 10px;
     border: none;
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     position: relative;
     overflow: hidden;
     text-decoration: none;
@@ -628,7 +635,7 @@
   .upload-zone {
     border: 2px dashed var(--border);
     border-radius: 14px;
-    padding: 28px 20px;
+    padding: 16px 12px; /* Reduced padding */
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -649,9 +656,9 @@
   }
 
   .upload-zone i {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--accent);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
     transition: transform 0.3s ease;
   }
@@ -662,13 +669,13 @@
 
   .upload-zone .upload-title {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--fg);
     margin-bottom: 4px;
   }
 
   .upload-zone .upload-sub {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--muted);
   }
 
@@ -684,12 +691,12 @@
     display: none;
     align-items: center;
     gap: 10px;
-    padding: 10px 16px;
-    border-radius: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
     background: rgba(52, 211, 153, 0.1);
     border: 1px solid rgba(52, 211, 153, 0.3);
-    margin-top: 12px;
-    font-size: 0.82rem;
+    margin-top: 10px;
+    font-size: 0.8rem;
     color: var(--frost);
   }
 
@@ -744,16 +751,34 @@
 <div class="app-container">
   <header class="header">
     <h1>Icon-Studio</h1>
-    <a class="action-btn btn-primary" href="https://github.com/chris1111/Icon-Studio" target="_blank" style="display:inline-flex; width: auto; margin-top: 10px;">
+    <a class="action-btn btn-primary" href="https://github.com/chris1111/Icon-Studio" target="_blank" style="display:inline-flex; width: auto; margin-top: 8px;">
       <i class="fab fa-github"></i> View on Github
     </a>
     <p>Create your unique icon or avatar with custom shapes, rings, and effects</p>
     <p><small>Copyright © 2026 chris1111 , All Rights Reserved.</small></p>
   </header>
 
-  <div class="main-grid">
-    <!-- Left: Preview -->
+  <div class="main-layout">
+    <!-- Left Column: Upload, Preview & Sizes -->
     <div class="preview-panel">
+      
+      <!-- Upload Image (Moved Here) -->
+      <div class="control-card" style="max-width: 260px; width: 100%;">
+        <h3><i class="fas fa-cloud-arrow-up"></i> Upload Image</h3>
+        <div class="upload-zone" id="uploadZone">
+          <i class="fas fa-image"></i>
+          <div class="upload-title">Drag and drop image here</div>
+          <div class="upload-sub">or <span id="browseBtn">browse files</span></div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*">
+        <div class="file-info" id="fileInfo">
+          <i class="fas fa-check-circle"></i>
+          <span class="file-name" id="fileName"></span>
+          <button class="remove-btn" id="removeFileBtn" title="Remove image"><i class="fas fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <!-- Avatar Stage -->
       <div class="avatar-stage" id="avatarStage">
         <div class="avatar-glow" id="avatarGlow"></div>
         <div class="avatar-ring ring-ice shape-circle ring-medium" id="avatarRing"></div>
@@ -765,25 +790,25 @@
       <!-- Size previews -->
       <div class="size-preview" id="sizePreview">
         <div class="size-item">
-          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:128px;height:128px;" data-mini="true">
+          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:72px;height:72px;" data-mini="true">
             <img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy">
           </div>
           <span>128px</span>
         </div>
         <div class="size-item">
-          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:64px;height:64px;" data-mini="true">
+          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:44px;height:44px;" data-mini="true">
             <img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy">
           </div>
           <span>64px</span>
         </div>
         <div class="size-item">
-          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:40px;height:40px;" data-mini="true">
+          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:28px;height:28px;" data-mini="true">
             <img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy">
           </div>
           <span>40px</span>
         </div>
         <div class="size-item">
-          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:28px;height:28px;" data-mini="true">
+          <div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:20px;height:20px;" data-mini="true">
             <img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy">
           </div>
           <span>28px</span>
@@ -791,7 +816,7 @@
       </div>
 
       <!-- Action buttons -->
-      <div class="action-row" style="width:100%;max-width:400px;">
+      <div class="action-row">
         <button class="action-btn btn-primary" onclick="downloadAvatar(256)">
           <i class="fas fa-download"></i> 256px
         </button>
@@ -804,29 +829,12 @@
       </div>
     </div>
 
-    <!-- Right: Controls -->
-    <div class="controls-panel">
-
-      <!-- Upload -->
-      <div class="control-card">
-        <h3><i class="fas fa-cloud-arrow-up"></i> Upload Image</h3>
-        <div class="upload-zone" id="uploadZone">
-          <i class="fas fa-image"></i>
-          <div class="upload-title">Drag and drop your image here</div>
-          <div class="upload-sub">or <span id="browseBtn">browse files</span> — PNG, JPG, SVG, WebP</div>
-        </div>
-        <input type="file" id="fileInput" accept="image/*">
-        <div class="file-info" id="fileInfo">
-          <i class="fas fa-check-circle"></i>
-          <span class="file-name" id="fileName"></span>
-          <button class="remove-btn" id="removeFileBtn" title="Remove image"><i class="fas fa-xmark"></i></button>
-        </div>
-      </div>
-
+    <!-- Middle Column: Core Controls -->
+    <div class="controls-col">
       <!-- Border Shape & Ring -->
       <div class="control-card">
         <h3><i class="fas fa-shapes"></i> Border Shape</h3>
-        <div class="option-grid" id="shapeOptions" style="margin-bottom:16px;">
+        <div class="option-grid" id="shapeOptions" style="margin-bottom:12px;">
           <button class="option-btn active" data-shape="circle"><span class="shape-preview sp-circle"></span> Circle</button>
           <button class="option-btn" data-shape="rounded"><span class="shape-preview sp-rounded"></span> Rounded</button>
           <button class="option-btn" data-shape="square"><span class="shape-preview sp-square"></span> Square</button>
@@ -836,8 +844,8 @@
           <button class="option-btn" data-shape="octagon"><span class="shape-preview sp-octagon"></span> Octagon</button>
         </div>
 
-        <h3 style="font-size:0.9rem;margin-bottom:10px;"><i class="fas fa-palette"></i> Color</h3>
-        <div class="option-grid" id="ringOptions" style="margin-bottom:16px;">
+        <h3 style="font-size:0.85rem;margin-bottom:8px;"><i class="fas fa-palette"></i> Ring Color</h3>
+        <div class="option-grid" id="ringOptions" style="margin-bottom:12px;">
           <button class="option-btn" data-ring="none">None</button>
           <button class="option-btn active" data-ring="ice"><span class="ring-color-dot rcd-ice"></span> Ice</button>
           <button class="option-btn" data-ring="frost"><span class="ring-color-dot rcd-frost"></span> Frost</button>
@@ -854,14 +862,17 @@
           <button class="option-btn" data-ring="plasma"><span class="ring-color-dot rcd-plasma"></span> Plasma</button>
         </div>
 
-        <h3 style="font-size:0.9rem;margin-bottom:10px;"><i class="fas fa-expand"></i> Width</h3>
+        <h3 style="font-size:0.85rem;margin-bottom:8px;"><i class="fas fa-expand"></i> Width</h3>
         <div class="option-grid" id="ringWidthOptions">
           <button class="option-btn" data-width="thin">Thin</button>
           <button class="option-btn active" data-width="medium">Medium</button>
           <button class="option-btn" data-width="thick">Thick</button>
         </div>
       </div>
+    </div>
 
+    <!-- Right Column: Effects & Adjustments -->
+    <div class="controls-col">
       <!-- Image Effects -->
       <div class="control-card">
         <h3><i class="fas fa-layer-group"></i> Image Effects</h3>
@@ -875,7 +886,7 @@
 
       <!-- Background -->
       <div class="control-card">
-        <h3><i class="fas fa-palette"></i> Background</h3>
+        <h3><i class="fas fa-fill-drip"></i> Background</h3>
         <div class="option-grid" id="bgOptions">
           <button class="bg-color-btn active" data-bg="gradient1" style="background:linear-gradient(135deg,#0c1929,#1a2744);" title="Deep Ocean"></button>
           <button class="bg-color-btn" data-bg="dark" style="background:#0a0e1a;" title="Void"></button>
@@ -912,13 +923,13 @@
       <!-- Rotation & Scale -->
       <div class="control-card">
         <h3><i class="fas fa-rotate"></i> Rotation & Scale</h3>
-        <div class="slider-row" style="margin-bottom:16px;">
-          <label style="font-size:0.85rem;color:var(--muted);min-width:60px;">Rotate</label>
+        <div class="slider-row" style="margin-bottom:12px;">
+          <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Rotate</label>
           <input type="range" id="rotationSlider" min="0" max="360" value="0">
           <span class="val" id="rotationVal">0°</span>
         </div>
         <div class="slider-row">
-          <label style="font-size:0.85rem;color:var(--muted);min-width:60px;">Scale</label>
+          <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Scale</label>
           <input type="range" id="scaleSlider" min="80" max="200" value="100">
           <span class="val" id="scaleVal">100%</span>
         </div>
