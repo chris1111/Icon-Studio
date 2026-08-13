@@ -408,10 +408,21 @@
           <input type="range" id="xSlider" min="-50" max="50" value="0">
           <span class="val" id="xVal">0</span>
         </div>
-        <div class="slider-row" style="margin-bottom: 0;">
+        <div class="slider-row">
           <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Y Pos</label>
           <input type="range" id="ySlider" min="-50" max="50" value="0">
           <span class="val" id="yVal">0</span>
+        </div>
+        <!-- Up / Down Controls -->
+        <div class="slider-row">
+          <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Image Up</label>
+          <input type="range" id="upSlider" min="0" max="100" value="0">
+          <span class="val" id="upVal">0</span>
+        </div>
+        <div class="slider-row" style="margin-bottom: 0;">
+          <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Image Down</label>
+          <input type="range" id="downSlider" min="0" max="100" value="0">
+          <span class="val" id="downVal">0</span>
         </div>
       </div>
     </div>
@@ -468,6 +479,8 @@
     scale: 100,
     posX: 0,
     posY: 0,
+    up: 0,     // NEW: Image Up
+    down: 0,   // NEW: Image Down
     currentSrc: DEFAULT_IMG_SRC,
     isUploaded: false
   };
@@ -504,7 +517,10 @@
 
     var cssFilter = getCssFilterString(state.filter);
     avatarImg.style.filter = cssFilter;
-    avatarImg.style.transform = 'rotate(' + state.rotation + 'deg) scale(' + (state.scale / 100) + ') translate(' + state.posX + '%, ' + state.posY + '%)';
+    
+    // Calculate final Y position combining Y Pos, Image Up, and Image Down
+    var finalY = state.posY - state.up + state.down;
+    avatarImg.style.transform = 'rotate(' + state.rotation + 'deg) scale(' + (state.scale / 100) + ') translate(' + state.posX + '%, ' + finalY + '%)';
 
     document.querySelectorAll('.mini-avatar').forEach(function(m) {
       m.className = 'mini-avatar shape-' + state.shape + ' avatar-bg-' + state.bg + ' overlay-' + state.overlay;
@@ -560,6 +576,8 @@
   var scaleSlider = document.getElementById('scaleSlider');
   var xSlider = document.getElementById('xSlider');
   var ySlider = document.getElementById('ySlider');
+  var upSlider = document.getElementById('upSlider');
+  var downSlider = document.getElementById('downSlider');
 
   rotationSlider.addEventListener('input', function() {
     state.rotation = parseInt(rotationSlider.value);
@@ -582,6 +600,18 @@
   ySlider.addEventListener('input', function() {
     state.posY = parseInt(ySlider.value);
     document.getElementById('yVal').textContent = state.posY;
+    updateAvatar();
+  });
+
+  upSlider.addEventListener('input', function() {
+    state.up = parseInt(upSlider.value);
+    document.getElementById('upVal').textContent = state.up;
+    updateAvatar();
+  });
+
+  downSlider.addEventListener('input', function() {
+    state.down = parseInt(downSlider.value);
+    document.getElementById('downVal').textContent = state.down;
     updateAvatar();
   });
 
@@ -701,6 +731,12 @@
         document.getElementById('ySlider').value = state.posY;
         document.getElementById('yVal').textContent = state.posY;
         
+        document.getElementById('upSlider').value = state.up;
+        document.getElementById('upVal').textContent = state.up;
+        
+        document.getElementById('downSlider').value = state.down;
+        document.getElementById('downVal').textContent = state.down;
+        
         // Apply to avatar
         updateAvatar();
         showToast('Preset loaded successfully!');
@@ -758,7 +794,10 @@
     var imgSize = drawSize * scale;
     
     var offsetX = (state.posX / 100) * drawSize;
-    var offsetY = (state.posY / 100) * drawSize;
+    // Incorporate Up and Down into the final Y offset for canvas drawing
+    var finalYState = state.posY - state.up + state.down;
+    var offsetY = (finalYState / 100) * drawSize;
+    
     var baseX = drawMargin + (drawSize - imgSize) / 2 + offsetX;
     var baseY = drawMargin + (drawSize - imgSize) / 2 + offsetY;
 
