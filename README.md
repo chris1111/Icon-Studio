@@ -4,5 +4,9 @@
 
 - Create and customize your Icon or Avatar.
 ## Start using Icon-Studio ➢ [Icon-Studio](https://chris1111.github.io/Icon-Studio/)
+
+### Combined with this tools ➥ [Image Resizer](https://chris1111.github.io/Image-Resizer/) 
+they are the perfect tools for creating themes icons for OpenCore or Clover.
+
 - HTML Page Create with help of [Z-AI](https://z.ai)
 
