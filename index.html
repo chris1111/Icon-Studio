@@ -30,7 +30,6 @@
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    top: 0 !important; /* Fixes layout shift caused by google translate top bar */
   }
 
   .bg-layer { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
@@ -216,24 +215,6 @@
   .file-info .remove-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.9rem; padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
   .file-info .remove-btn:hover { color: #f87171; background: rgba(248, 113, 113, 0.1); }
 
-  /* Custom styling for Google Translate Dropdown to match theme */
-  .translate-container { position: fixed; top: 15px; right: 15px; z-index: 1000; }
-  #google_translate_element select {
-    background: var(--card);
-    color: var(--fg);
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-    backdrop-filter: blur(12px);
-  }
-  #google_translate_element select option { background: #0a0e1a; color: var(--fg); }
-  .goog-te-banner-frame.skiptranslate {display: none !important;}
-  body { top: 0px !important; }
-
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(78,200,240,0.2); border-radius: 3px; }
@@ -243,11 +224,6 @@
 </style>
 </head>
 <body>
-
-<!-- Google Translate Widget Container -->
-<div class="translate-container">
-  <div id="google_translate_element"></div>
-</div>
 
 <div class="bg-layer"><div class="bg-gradient"></div></div>
 <div class="corner-deco tl"></div>
@@ -459,17 +435,6 @@
 </div>
 
 <canvas id="exportCanvas"></canvas>
-
-<!-- Google Translate Script -->
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
   // ===== Background Particles =====
