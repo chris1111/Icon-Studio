@@ -276,10 +276,13 @@
       <!-- Action buttons -->
       <div class="action-row" style="flex-direction: column; gap: 8px; max-width: 260px;">
         <div style="display: flex; gap: 10px; width: 100%;">
+          <button class="action-btn btn-secondary" onclick="downloadAvatar(128)"><i class="fas fa-download"></i> 128px</button>
           <button class="action-btn btn-primary" onclick="downloadAvatar(256)"><i class="fas fa-download"></i> 256px</button>
-          <button class="action-btn btn-accent" onclick="downloadAvatar(512)"><i class="fas fa-download"></i> 512px</button>
         </div>
-        <button class="action-btn btn-upload" onclick="downloadAvatar(1024)" style="width: 100%;"><i class="fas fa-download"></i> 1024px</button>
+        <div style="display: flex; gap: 10px; width: 100%;">
+          <button class="action-btn btn-accent" onclick="downloadAvatar(512)"><i class="fas fa-download"></i> 512px</button>
+          <button class="action-btn btn-upload" onclick="downloadAvatar(1024)"><i class="fas fa-download"></i> 1024px</button>
+        </div>
       </div>
     </div>
 
