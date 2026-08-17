@@ -99,6 +99,7 @@
   .ring-ocean { background: conic-gradient(from 0deg, #67e8f9, #06b6d4, #0e7490, #06b6d4, #67e8f9); }
   .ring-candy { background: conic-gradient(from 0deg, #f9a8d4, #a78bfa, #67e8f9, #f9a8d4); }
   .ring-plasma { background: conic-gradient(from 0deg, #ff00cc, #3333ff, #00ffff, #3333ff, #ff00cc); }
+  .ring-metal { background: conic-gradient(from 0deg, #e2e8f0, #94a3b8, #475569, #94a3b8, #e2e8f0); }
 
   .ring-thin { inset: -3px; }
   .ring-medium { inset: -6px; }
@@ -147,6 +148,8 @@
   .rcd-ocean { background: conic-gradient(#67e8f9, #0e7490, #67e8f9); }
   .rcd-candy { background: conic-gradient(#f9a8d4, #a78bfa, #67e8f9, #f9a8d4); }
   .rcd-plasma { background: conic-gradient(#ff00cc, #3333ff, #00ffff, #ff00cc); }
+  /* NEW: Metal Color Dot */
+  .rcd-metal { background: conic-gradient(#e2e8f0, #94a3b8, #475569, #94a3b8, #e2e8f0); }
 
   .bg-color-btn { width: 32px; height: 32px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; }
   .bg-color-btn::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 60%); }
@@ -179,8 +182,8 @@
   .btn-upload { background: linear-gradient(135deg, #34d399, #059669); color: #0a0e1a; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.25); }
   .btn-upload:hover { box-shadow: 0 6px 28px rgba(52, 211, 153, 0.4); }
 
-  .btn-danger { background: linear-gradient(135deg, #34c2c2, #345e69); color: #fff; box-shadow: 0 4px 20px rgba(248, 113, 113, 0.2); }
-  .btn-danger:hover { box-shadow: 0 6px 28px rgba(248, 113, 113, 0.35); }
+  .btn-danger { background: linear-gradient(135deg, #3a4054, #1b264a); color: #fff; box-shadow: 0 4px 6px -1px rgba(74, 85, 104, 0.2); }
+  .btn-danger:hover { box-shadow: 0 4px 6px -1px rgba(74, 85, 104, 0.2); }
 
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 14px 28px; border-radius: 12px; background: rgba(78, 200, 240, 0.15); border: 1px solid var(--accent); color: var(--fg); font-weight: 600; font-size: 0.9rem; backdrop-filter: blur(16px); z-index: 1000; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; display: flex; align-items: center; gap: 10px; }
   .toast.show { transform: translateX(-50%) translateY(0); }
@@ -354,6 +357,8 @@
           <button class="option-btn" data-ring="ocean"><span class="ring-color-dot rcd-ocean"></span> Ocean</button>
           <button class="option-btn" data-ring="candy"><span class="ring-color-dot rcd-candy"></span> Candy</button>
           <button class="option-btn" data-ring="plasma"><span class="ring-color-dot rcd-plasma"></span> Plasma</button>
+          <!-- NEW: Metal Button -->
+          <button class="option-btn" data-ring="metal"><span class="ring-color-dot rcd-metal"></span> Metal</button>
         </div>
 
         <h3 style="font-size:0.85rem;margin-bottom:8px;"><i class="fas fa-expand"></i> Icon Width</h3>
@@ -1112,7 +1117,9 @@
       solar: ['#fef08a', '#facc15', '#eab308', '#facc15', '#fef08a'],
       ocean: ['#67e8f9', '#06b6d4', '#0e7490', '#06b6d4', '#67e8f9'],
       candy: ['#f9a8d4', '#a78bfa', '#67e8f9', '#f9a8d4'],
-      plasma: ['#ff00cc', '#3333ff', '#00ffff', '#3333ff', '#ff00cc']
+      plasma: ['#ff00cc', '#3333ff', '#00ffff', '#3333ff', '#ff00cc'],
+      // NEW: Metal array for canvas drawing
+      metal: ['#e2e8f0', '#94a3b8', '#475569', '#94a3b8', '#e2e8f0']
     };
     var ringColors = colors[state.ring] || colors.ice;
     var cx = size / 2, cy = size / 2;
