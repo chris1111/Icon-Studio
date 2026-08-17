@@ -28,7 +28,7 @@ Summary
 In short, Icon-Studio is a client-side design tool meant for creating aesthetically pleasing, perfectly cropped, and stylized profile pictures or app icons without the need for complex software like Photoshop. All processing is done directly in the user's browser using HTML, CSS, and JavaScript.
 
 ### Combined with this tools ➥ [Image Resizer](https://chris1111.github.io/Image-Resizer/) ➥ [Workshop Layered Image-Studio](https://github.com/chris1111/Workshop-Layered-Image-Studio) 
-they are the perfect tools for creating themes icons for OpenCore or Clover.
+A free easy way for those who have virtually no knowledge of graphic design. they are the perfect tools for creating themes icons sets for OpenCore or Clover.
 
 - HTML Page Create with help of [Z-AI](https://z.ai)
 
