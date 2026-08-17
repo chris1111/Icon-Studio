@@ -215,6 +215,19 @@
   .file-info .remove-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.9rem; padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
   .file-info .remove-btn:hover { color: #f87171; background: rgba(248, 113, 113, 0.1); }
 
+  /* ===== Template Modal Styles ===== */
+  .template-modal-overlay { position: fixed; inset: 0; background: rgba(6, 10, 20, 0.85); backdrop-filter: blur(8px); z-index: 1500; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .template-modal-overlay.active { display: flex; }
+  .template-modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 600px; width: 100%; padding: 24px; box-shadow: 0 0 40px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
+  .template-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .template-close { background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
+  .template-close:hover { color: var(--fg); }
+  .template-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; }
+  .template-card { background: var(--deep); border: 2px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; position: relative; }
+  .template-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+  .template-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .template-card .template-name { padding: 8px 4px; text-align: center; font-size: 0.8rem; font-weight: 600; color: var(--frost); background: rgba(0,0,0,0.2); }
+
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(78,200,240,0.2); border-radius: 3px; }
@@ -262,15 +275,16 @@
         <div class="avatar-glow" id="avatarGlow"></div>
         <div class="avatar-ring ring-ice shape-circle ring-medium" id="avatarRing"></div>
         <div class="avatar-container shape-circle avatar-bg-gradient1 overlay-none" id="avatarContainer">
-          <img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="Avatar" id="avatarImg" loading="lazy">
+          <!-- Added crossorigin="anonymous" to fix Canvas Taint -->
+          <img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="Avatar" id="avatarImg" loading="lazy">
         </div>
       </div>
 
       <div class="size-preview" id="sizePreview">
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:72px;height:72px;" data-mini="true"><img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy"></div><span>128px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:44px;height:44px;" data-mini="true"><img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy"></div><span>64px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:28px;height:28px;" data-mini="true"><img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy"></div><span>40px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:20px;height:20px;" data-mini="true"><img src="https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true" alt="" loading="lazy"></div><span>28px</span></div>
+        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:72px;height:72px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>128px</span></div>
+        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:44px;height:44px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>64px</span></div>
+        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:28px;height:28px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>40px</span></div>
+        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:20px;height:20px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>28px</span></div>
       </div>
 
       <!-- Action buttons -->
@@ -288,6 +302,12 @@
 
     <!-- Middle Column: Core Controls -->
     <div class="controls-col">
+      
+      <!-- Load Template Button placed above Presets -->
+      <button class="action-btn btn-accent" id="openTemplatesBtn" style="width: 100%; padding: 14px; font-size: 1rem;">
+        <i class="fas fa-images"></i> Load Template
+      </button>
+
       <!-- Preset System -->
       <div class="control-card">
         <h3><i class="fas fa-sliders"></i> Presets</h3>
@@ -432,6 +452,21 @@
   </div>
 </div>
 
+<!-- Template Modal -->
+<div class="template-modal-overlay" id="templateModal">
+  <div class="template-modal">
+    <div class="template-header">
+      <h3 style="font-family:'Cinzel', serif; color:var(--ice); font-size:1.2rem; margin:0;">
+        <i class="fas fa-photo-film"></i> Choose a Template
+      </h3>
+      <button class="template-close" id="closeModalBtn">&times;</button>
+    </div>
+    <div class="template-gallery" id="templateGallery">
+      <!-- Templates injected by JS -->
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">
   <i class="fas fa-check-circle" style="color:var(--accent);"></i>
   <span id="toastMsg">Image downloaded!</span>
@@ -469,7 +504,8 @@
   })();
 
   // ===== State =====
-  const DEFAULT_IMG_SRC = 'https://github.com/chris1111/Icon-Studio/blob/main/Pics/Snow.webp?raw=true';
+  // Changed to raw.githubusercontent.com to fix Canvas CORS taint
+  const DEFAULT_IMG_SRC = 'https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp';
 
   const state = {
     shape: 'circle',
@@ -668,6 +704,92 @@
     fileInfo.classList.remove('visible');
     fileInput.value = '';
     showToast('Reverted to default image');
+  });
+
+  // ===== Template Modal Logic (Dynamic GitHub API Fetch & Base64 Convert) =====
+  const templateModal = document.getElementById('templateModal');
+  const openTemplatesBtn = document.getElementById('openTemplatesBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const templateGallery = document.getElementById('templateGallery');
+
+  // Fetch images directly from your GitHub folder
+  async function loadTemplates() {
+    templateGallery.innerHTML = '<p style="color: var(--muted); grid-column: 1 / -1; text-align: center;">Loading templates...</p>';
+    
+    // Updated GitHub API endpoint for your new "Template" folder
+    const apiUrl = 'https://api.github.com/repos/chris1111/Icon-Studio/contents/Pics/Template';
+    
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      const files = await response.json();
+      // Filter out subdirectories and non-image files
+      const imageFiles = files.filter(file => file.type === 'file' && /\.(png|jpg|jpeg|webp|svg|gif)$/i.test(file.name));
+      
+      templateGallery.innerHTML = ''; // Clear loading text
+      
+      if (imageFiles.length === 0) {
+        templateGallery.innerHTML = '<p style="color: var(--muted); grid-column: 1 / -1; text-align: center;">No images found in folder.</p>';
+        return;
+      }
+
+      // Create a card for each image found
+      imageFiles.forEach(file => {
+        const card = document.createElement('div');
+        card.className = 'template-card';
+        
+        // file.download_url is the direct raw link to the image
+        const imgUrl = file.download_url;
+        const cleanName = file.name.replace(/\.[^/.]+$/, ""); // Remove file extension for display name
+        
+        card.innerHTML = `
+          <img src="${imgUrl}" alt="${cleanName}" loading="lazy">
+          <div class="template-name">${cleanName}</div>
+        `;
+        
+        // NEW: Fetch as Base64 to bypass Canvas Cross-Origin Taint Error
+        card.addEventListener('click', async () => {
+          templateModal.classList.remove('active');
+          showToast('Loading ' + cleanName + ' template...');
+          
+          try {
+            // Fetch the image as a blob
+            const imgResponse = await fetch(imgUrl);
+            const blob = await imgResponse.blob();
+            
+            // Convert blob to base64 data URL
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              // e.target.result is the base64 string
+              updateAllImages(e.target.result);
+              state.isUploaded = true;
+              fileNameEl.textContent = file.name + ' (Template)';
+              fileInfo.classList.add('visible');
+              showToast(cleanName + ' template loaded!');
+            };
+            reader.readAsDataURL(blob);
+          } catch (err) {
+            console.error('Error loading template image:', err);
+            showToast('Failed to load template image.');
+          }
+        });
+        
+        templateGallery.appendChild(card);
+      });
+    } catch (error) {
+      console.error('Error fetching templates:', error);
+      templateGallery.innerHTML = '<p style="color: #f87171; grid-column: 1 / -1; text-align: center;">Error loading templates from GitHub.</p>';
+    }
+  }
+
+  // Load templates as soon as the page loads
+  loadTemplates();
+
+  openTemplatesBtn.addEventListener('click', () => templateModal.classList.add('active'));
+  closeModalBtn.addEventListener('click', () => templateModal.classList.remove('active'));
+  templateModal.addEventListener('click', (e) => {
+    if (e.target === templateModal) templateModal.classList.remove('active');
   });
 
   // ===== Preset Save/Load Logic =====
