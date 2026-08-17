@@ -179,6 +179,9 @@
   .btn-upload { background: linear-gradient(135deg, #34d399, #059669); color: #0a0e1a; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.25); }
   .btn-upload:hover { box-shadow: 0 6px 28px rgba(52, 211, 153, 0.4); }
 
+  .btn-danger { background: linear-gradient(135deg, #34c2c2, #345e69); color: #fff; box-shadow: 0 4px 20px rgba(248, 113, 113, 0.2); }
+  .btn-danger:hover { box-shadow: 0 6px 28px rgba(248, 113, 113, 0.35); }
+
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 14px 28px; border-radius: 12px; background: rgba(78, 200, 240, 0.15); border: 1px solid var(--accent); color: var(--fg); font-weight: 600; font-size: 0.9rem; backdrop-filter: blur(16px); z-index: 1000; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; display: flex; align-items: center; gap: 10px; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -275,7 +278,6 @@
         <div class="avatar-glow" id="avatarGlow"></div>
         <div class="avatar-ring ring-ice shape-circle ring-medium" id="avatarRing"></div>
         <div class="avatar-container shape-circle avatar-bg-gradient1 overlay-none" id="avatarContainer">
-          <!-- Added crossorigin="anonymous" to fix Canvas Taint -->
           <img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="Avatar" id="avatarImg" loading="lazy">
         </div>
       </div>
@@ -448,6 +450,11 @@
           <span class="val" id="downVal">0</span>
         </div>
       </div>
+      
+      <!-- Reset Button moved to the bottom right -->
+      <button class="action-btn btn-danger" id="resetBtn" style="width: 100%; padding: 14px; font-size: 1rem; margin-top: 4px;">
+        <i class="fas fa-rotate-left"></i> Reset to Default
+      </button>
     </div>
   </div>
 </div>
@@ -504,25 +511,29 @@
   })();
 
   // ===== State =====
-  // Changed to raw.githubusercontent.com to fix Canvas CORS taint
   const DEFAULT_IMG_SRC = 'https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp';
 
-  const state = {
-    shape: 'circle',
-    ring: 'ice',
-    ringWidth: 'medium',
-    bg: 'gradient1',
-    filter: 'none',
-    overlay: 'none',
-    rotation: 0,
-    scale: 100,
-    posX: 0,
-    posY: 0,
-    up: 0,     // NEW: Image Up
-    down: 0,   // NEW: Image Down
-    currentSrc: DEFAULT_IMG_SRC,
-    isUploaded: false
-  };
+  // Function to get the initial default state (useful for resetting)
+  function getDefaultState() {
+    return {
+      shape: 'circle',
+      ring: 'ice',
+      ringWidth: 'medium',
+      bg: 'gradient1',
+      filter: 'none',
+      overlay: 'none',
+      rotation: 0,
+      scale: 100,
+      posX: 0,
+      posY: 0,
+      up: 0,
+      down: 0,
+      currentSrc: DEFAULT_IMG_SRC,
+      isUploaded: false
+    };
+  }
+
+  const state = getDefaultState();
 
   const avatarContainer = document.getElementById('avatarContainer');
   const avatarRing = document.getElementById('avatarRing');
@@ -706,6 +717,60 @@
     showToast('Reverted to default image');
   });
 
+  // ===== Reset Logic =====
+  const resetBtn = document.getElementById('resetBtn');
+  resetBtn.addEventListener('click', () => {
+    // Reset state object
+    Object.assign(state, getDefaultState());
+
+    // Reset UI Buttons Helper
+    const resetGroupUI = (containerId, key, datasetKey) => {
+      const container = document.getElementById(containerId);
+      container.querySelectorAll('.option-btn, .bg-color-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset[datasetKey] === state[key]);
+      });
+    };
+    
+    resetGroupUI('shapeOptions', 'shape', 'shape');
+    resetGroupUI('ringOptions', 'ring', 'ring');
+    resetGroupUI('ringWidthOptions', 'ringWidth', 'width');
+    resetGroupUI('filterOptions', 'filter', 'filter');
+    resetGroupUI('overlayOptions', 'overlay', 'overlay');
+    
+    // Reset Background Buttons
+    document.querySelectorAll('.bg-color-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.bg === state.bg);
+    });
+
+    // Reset Sliders
+    document.getElementById('rotationSlider').value = state.rotation;
+    document.getElementById('rotationVal').textContent = state.rotation + '°';
+    
+    document.getElementById('scaleSlider').value = state.scale;
+    document.getElementById('scaleVal').textContent = state.scale + '%';
+    
+    document.getElementById('xSlider').value = state.posX;
+    document.getElementById('xVal').textContent = state.posX;
+    
+    document.getElementById('ySlider').value = state.posY;
+    document.getElementById('yVal').textContent = state.posY;
+    
+    document.getElementById('upSlider').value = state.up;
+    document.getElementById('upVal').textContent = state.up;
+    
+    document.getElementById('downSlider').value = state.down;
+    document.getElementById('downVal').textContent = state.down;
+
+    // Reset Image & File Info
+    updateAllImages(DEFAULT_IMG_SRC);
+    fileInfo.classList.remove('visible');
+    fileInput.value = '';
+    
+    // Apply to avatar
+    updateAvatar();
+    showToast('Studio reset to default!');
+  });
+
   // ===== Template Modal Logic (Dynamic GitHub API Fetch & Base64 Convert) =====
   const templateModal = document.getElementById('templateModal');
   const openTemplatesBtn = document.getElementById('openTemplatesBtn');
@@ -748,7 +813,7 @@
           <div class="template-name">${cleanName}</div>
         `;
         
-        // NEW: Fetch as Base64 to bypass Canvas Cross-Origin Taint Error
+        // Fetch as Base64 to bypass Canvas Cross-Origin Taint Error
         card.addEventListener('click', async () => {
           templateModal.classList.remove('active');
           showToast('Loading ' + cleanName + ' template...');
