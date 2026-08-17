@@ -6,6 +6,8 @@
 
 ### Create your unique icon or avatar with custom shapes, rings, and effects.
 
+### Update 17 Aug 2026 Add Template images.
+
 1. Image Upload and Preview
 Users can upload their own image via drag-and-drop or file browsing (supports PNG, JPG, ICO, SVG, WebP).
 The page provides a large, live preview of the image alongside smaller previews showing how the icon will look at standard smaller sizes (128px, 64px, 40px, 28px).
