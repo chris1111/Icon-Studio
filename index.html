@@ -62,53 +62,18 @@
   @media (max-width: 1000px) { .main-layout { grid-template-columns: 1fr; } }
 
   .preview-panel { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .avatar-stage { position: relative; width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; }
-  .avatar-container { position: relative; width: 160px; height: 160px; overflow: hidden; transition: border-radius 0.5s ease, clip-path 0.5s ease, transform 0.3s ease; cursor: pointer; z-index: 2; }
   
-  .avatar-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(78, 200, 240, 0.15) 0%, transparent 70%); animation: pulseGlow 3s ease-in-out infinite; pointer-events: none; transition: transform 0.15s ease-out; }
+  .avatar-stage { position: relative; width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; }
+  .avatar-glow { position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(78, 200, 240, 0.15) 0%, transparent 70%); animation: pulseGlow 3s ease-in-out infinite; pointer-events: none; transition: transform 0.15s ease-out; z-index: 0; }
   @keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
-
-  .avatar-ring { position: absolute; inset: -4px; pointer-events: none; transition: all 0.5s ease; z-index: 1; filter: drop-shadow(0 0 8px rgba(78, 200, 240, 0.4)); }
-  .avatar-container:hover { transform: scale(1.03); }
-  .avatar-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.5s ease; }
-
-  .overlay-none::after { content: none; }
-  .overlay-gradient::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10, 14, 26, 0.7) 100%); pointer-events: none; }
-  .overlay-vignette::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, transparent 30%, rgba(10, 14, 26, 0.8) 120%); pointer-events: none; }
-  .overlay-inner::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 30px 10px rgba(10, 14, 26, 0.6); border-radius: inherit; pointer-events: none; }
-
-  .shape-circle { border-radius: 50%; }
-  .shape-rounded { border-radius: 24px; }
-  .shape-square { border-radius: 8px; }
-  .shape-hexagon { border-radius: 0; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
-  .shape-diamond { border-radius: 0; clip-path: polygon(50% 2%, 98% 50%, 50% 98%, 2% 50%); }
-  .shape-octagon { border-radius: 0; clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
-  .shape-ios { border-radius: 22%; clip-path: none; }
-
-  .ring-none { display: none; }
-  .ring-ice { background: conic-gradient(from 0deg, var(--ice), var(--accent), var(--accent2), var(--ice)); }
-  .ring-frost { background: conic-gradient(from 0deg, #e0f2fe, #7dd3fc, #0ea5e9, #7dd3fc, #e0f2fe); }
-  .ring-aurora { background: conic-gradient(from 0deg, #34d399, #4ec8f0, #a06cf0, #f472b6, #34d399); }
-  .ring-gold { background: conic-gradient(from 0deg, #fbbf24, #f59e0b, #d97706, #f59e0b, #fbbf24); }
-  .ring-crystal { background: conic-gradient(from 0deg, rgba(78,200,240,0.1), rgba(78,200,240,0.6), rgba(78,200,240,0.1), rgba(78,200,240,0.6), rgba(78,200,240,0.1)); }
-  .ring-nebula { background: conic-gradient(from 0deg, #6366f1, #8b5cf6, #ec4899, #8b5cf6, #6366f1); }
-  .ring-rose { background: conic-gradient(from 0deg, #fda4af, #fb7185, #e11d48, #fb7185, #fda4af); }
-  .ring-sunset { background: conic-gradient(from 0deg, #fb923c, #ef4444, #ec4899, #fb923c); }
-  .ring-emerald { background: conic-gradient(from 0deg, #6ee7b7, #10b981, #047857, #10b981, #6ee7b7); }
-  .ring-solar { background: conic-gradient(from 0deg, #fef08a, #facc15, #eab308, #facc15, #fef08a); }
-  .ring-ocean { background: conic-gradient(from 0deg, #67e8f9, #06b6d4, #0e7490, #06b6d4, #67e8f9); }
-  .ring-candy { background: conic-gradient(from 0deg, #f9a8d4, #a78bfa, #67e8f9, #f9a8d4); }
-  .ring-plasma { background: conic-gradient(from 0deg, #ff00cc, #3333ff, #00ffff, #3333ff, #ff00cc); }
-  .ring-metal { background: conic-gradient(from 0deg, #e2e8f0, #94a3b8, #475569, #94a3b8, #e2e8f0); }
-
-  .ring-thin { inset: -3px; }
-  .ring-medium { inset: -6px; }
-  .ring-thick { inset: -10px; }
+  
+  .avatar-preview-wrapper { position: relative; width: 160px; height: 160px; z-index: 1; transition: transform 0.3s ease; cursor: pointer; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+  .avatar-preview-wrapper:hover { transform: scale(1.03); }
+  #previewCanvas { width: 100%; height: 100%; display: block; }
 
   .size-preview { display: flex; align-items: flex-end; gap: 20px; justify-content: center; padding: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(12px); width: 100%; max-width: 260px; }
   .size-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .size-item .mini-avatar { overflow: hidden; transition: border-radius 0.5s ease, clip-path 0.5s ease; background: var(--deep); position: relative; }
-  .size-item .mini-avatar img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.3s ease; }
+  .size-item canvas { display: block; }
   .size-item span { font-size: 0.7rem; color: var(--muted); font-weight: 600; }
 
   .controls-col { display: flex; flex-direction: column; gap: 14px; }
@@ -148,7 +113,6 @@
   .rcd-ocean { background: conic-gradient(#67e8f9, #0e7490, #67e8f9); }
   .rcd-candy { background: conic-gradient(#f9a8d4, #a78bfa, #67e8f9, #f9a8d4); }
   .rcd-plasma { background: conic-gradient(#ff00cc, #3333ff, #00ffff, #ff00cc); }
-  /* NEW: Metal Color Dot */
   .rcd-metal { background: conic-gradient(#e2e8f0, #94a3b8, #475569, #94a3b8, #e2e8f0); }
 
   .bg-color-btn { width: 32px; height: 32px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; }
@@ -182,23 +146,15 @@
   .btn-upload { background: linear-gradient(135deg, #34d399, #059669); color: #0a0e1a; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.25); }
   .btn-upload:hover { box-shadow: 0 6px 28px rgba(52, 211, 153, 0.4); }
 
-  .btn-danger { background: linear-gradient(135deg, #3a4054, #1b264a); color: #fff; box-shadow: 0 4px 6px -1px rgba(74, 85, 104, 0.2); }
-  .btn-danger:hover { box-shadow: 0 4px 6px -1px rgba(74, 85, 104, 0.2); }
+  /* NEW: Dark Grey Blue Button */
+  .btn-neutral { background: linear-gradient(135deg, #334155, #1e293b); color: #cbd5e1; box-shadow: 0 4px 20px rgba(51, 65, 85, 0.3); border: 1px solid rgba(148, 163, 184, 0.2); }
+  .btn-neutral:hover { box-shadow: 0 6px 28px rgba(51, 65, 85, 0.5); color: #fff; }
 
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 14px 28px; border-radius: 12px; background: rgba(78, 200, 240, 0.15); border: 1px solid var(--accent); color: var(--fg); font-weight: 600; font-size: 0.9rem; backdrop-filter: blur(16px); z-index: 1000; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; display: flex; align-items: center; gap: 10px; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
   #exportCanvas { display: none; }
   #loadPresetInput { display: none; }
-
-  .avatar-bg-dark { background: #0a0e1a; }
-  .avatar-bg-light { background: #e8f0ff; }
-  .avatar-bg-gradient1 { background: linear-gradient(135deg, #0c1929, #1a2744); }
-  .avatar-bg-gradient2 { background: linear-gradient(135deg, #0f172a, #1e1b4b); }
-  .avatar-bg-gradient3 { background: linear-gradient(135deg, #042f2e, #0c4a6e); }
-  .avatar-bg-gradient4 { background: linear-gradient(135deg, #1e1b4b, #312e81); }
-  .avatar-bg-gradient5 { background: linear-gradient(135deg, #0a0e1a, #164e63); }
-  .avatar-bg-none { background-color: #1a202c; background-image: linear-gradient(45deg, #2d3748 25%, transparent 25%), linear-gradient(-45deg, #2d3748 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #2d3748 75%), linear-gradient(-45deg, transparent 75%, #2d3748 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
 
   .corner-deco { position: fixed; width: 200px; height: 200px; pointer-events: none; z-index: 0; opacity: 0.3; }
   .corner-deco.tl { top: 0; left: 0; background: radial-gradient(circle at 0% 0%, rgba(78,200,240,0.15), transparent 70%); }
@@ -221,7 +177,6 @@
   .file-info .remove-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.9rem; padding: 2px 6px; border-radius: 4px; transition: all 0.2s; }
   .file-info .remove-btn:hover { color: #f87171; background: rgba(248, 113, 113, 0.1); }
 
-  /* ===== Template Modal Styles ===== */
   .template-modal-overlay { position: fixed; inset: 0; background: rgba(6, 10, 20, 0.85); backdrop-filter: blur(8px); z-index: 1500; display: none; align-items: center; justify-content: center; padding: 20px; }
   .template-modal-overlay.active { display: flex; }
   .template-modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; max-width: 600px; width: 100%; padding: 24px; box-shadow: 0 0 40px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
@@ -279,20 +234,19 @@
 
       <div class="avatar-stage" id="avatarStage">
         <div class="avatar-glow" id="avatarGlow"></div>
-        <div class="avatar-ring ring-ice shape-circle ring-medium" id="avatarRing"></div>
-        <div class="avatar-container shape-circle avatar-bg-gradient1 overlay-none" id="avatarContainer">
-          <img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="Avatar" id="avatarImg" loading="lazy">
+        <div class="avatar-preview-wrapper">
+          <canvas id="previewCanvas" data-size="160"></canvas>
+          <img id="avatarImg" alt="Avatar Source" style="display: none;">
         </div>
       </div>
 
       <div class="size-preview" id="sizePreview">
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:72px;height:72px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>128px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:44px;height:44px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>64px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:28px;height:28px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>40px</span></div>
-        <div class="size-item"><div class="mini-avatar shape-circle avatar-bg-gradient1" style="width:20px;height:20px;" data-mini="true"><img crossorigin="anonymous" src="https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp" alt="" loading="lazy"></div><span>28px</span></div>
+        <div class="size-item"><canvas class="mini-canvas" data-size="72"></canvas><span>128px</span></div>
+        <div class="size-item"><canvas class="mini-canvas" data-size="44"></canvas><span>64px</span></div>
+        <div class="size-item"><canvas class="mini-canvas" data-size="28"></canvas><span>40px</span></div>
+        <div class="size-item"><canvas class="mini-canvas" data-size="20"></canvas><span>28px</span></div>
       </div>
 
-      <!-- Action buttons -->
       <div class="action-row" style="flex-direction: column; gap: 8px; max-width: 260px;">
         <div style="display: flex; gap: 10px; width: 100%;">
           <button class="action-btn btn-secondary" onclick="downloadAvatar(128)"><i class="fas fa-download"></i> 128px</button>
@@ -307,13 +261,10 @@
 
     <!-- Middle Column: Core Controls -->
     <div class="controls-col">
-      
-      <!-- Load Template Button placed above Presets -->
       <button class="action-btn btn-accent" id="openTemplatesBtn" style="width: 100%; padding: 14px; font-size: 1rem;">
         <i class="fas fa-images"></i> Load Template
       </button>
 
-      <!-- Preset System -->
       <div class="control-card">
         <h3><i class="fas fa-sliders"></i> Presets</h3>
         <div style="display: flex; gap: 10px;">
@@ -321,14 +272,12 @@
             <i class="fas fa-folder-open"></i> Load Preset
           </button>
           <input type="file" id="loadPresetInput" accept=".json">
-          
           <button class="action-btn btn-accent" onclick="savePreset()" style="flex: 1;">
             <i class="fas fa-floppy-disk"></i> Save Preset
           </button>
         </div>
       </div>
 
-      <!-- Border Shape & Ring -->
       <div class="control-card">
         <h3><i class="fas fa-shapes"></i> Border Shape</h3>
         <div class="option-grid" id="shapeOptions" style="margin-bottom:12px;">
@@ -357,7 +306,6 @@
           <button class="option-btn" data-ring="ocean"><span class="ring-color-dot rcd-ocean"></span> Ocean</button>
           <button class="option-btn" data-ring="candy"><span class="ring-color-dot rcd-candy"></span> Candy</button>
           <button class="option-btn" data-ring="plasma"><span class="ring-color-dot rcd-plasma"></span> Plasma</button>
-          <!-- NEW: Metal Button -->
           <button class="option-btn" data-ring="metal"><span class="ring-color-dot rcd-metal"></span> Metal</button>
         </div>
 
@@ -372,7 +320,6 @@
 
     <!-- Right Column: Effects & Adjustments -->
     <div class="controls-col">
-      <!-- Image Effects -->
       <div class="control-card">
         <h3><i class="fas fa-layer-group"></i> Image Effects</h3>
         <div class="option-grid" id="overlayOptions">
@@ -383,7 +330,6 @@
         </div>
       </div>
 
-      <!-- Background -->
       <div class="control-card">
         <h3><i class="fas fa-fill-drip"></i> Background</h3>
         <div class="option-grid" id="bgOptions">
@@ -398,7 +344,6 @@
         </div>
       </div>
 
-      <!-- Color Filter -->
       <div class="control-card">
         <h3><i class="fas fa-wand-magic-sparkles"></i> Color Filter</h3>
         <div class="option-grid" id="filterOptions">
@@ -419,7 +364,6 @@
         </div>
       </div>
 
-      <!-- Adjustments -->
       <div class="control-card">
         <h3><i class="fas fa-rotate"></i> Adjustments</h3>
         <div class="slider-row">
@@ -432,7 +376,6 @@
           <input type="range" id="scaleSlider" min="0" max="200" value="100">
           <span class="val" id="scaleVal">100%</span>
         </div>
-        <!-- Position Controls -->
         <div class="slider-row">
           <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">X Pos</label>
           <input type="range" id="xSlider" min="-50" max="50" value="0">
@@ -443,7 +386,6 @@
           <input type="range" id="ySlider" min="-50" max="50" value="0">
           <span class="val" id="yVal">0</span>
         </div>
-        <!-- Up / Down Controls -->
         <div class="slider-row">
           <label style="font-size:0.8rem;color:var(--muted);min-width:50px;">Image Up</label>
           <input type="range" id="upSlider" min="0" max="100" value="0">
@@ -456,15 +398,13 @@
         </div>
       </div>
       
-      <!-- Reset Button moved to the bottom right -->
-      <button class="action-btn btn-danger" id="resetBtn" style="width: 100%; padding: 14px; font-size: 1rem; margin-top: 4px;">
+      <button class="action-btn btn-neutral" id="resetBtn" style="width: 100%; padding: 14px; font-size: 1rem; margin-top: 4px;">
         <i class="fas fa-rotate-left"></i> Reset to Default
       </button>
     </div>
   </div>
 </div>
 
-<!-- Template Modal -->
 <div class="template-modal-overlay" id="templateModal">
   <div class="template-modal">
     <div class="template-header">
@@ -473,9 +413,7 @@
       </h3>
       <button class="template-close" id="closeModalBtn">&times;</button>
     </div>
-    <div class="template-gallery" id="templateGallery">
-      <!-- Templates injected by JS -->
-    </div>
+    <div class="template-gallery" id="templateGallery"></div>
   </div>
 </div>
 
@@ -515,10 +453,8 @@
     }
   })();
 
-  // ===== State =====
   const DEFAULT_IMG_SRC = 'https://raw.githubusercontent.com/chris1111/Icon-Studio/main/Pics/Snow.webp';
 
-  // Function to get the initial default state (useful for resetting)
   function getDefaultState() {
     return {
       shape: 'circle',
@@ -540,9 +476,35 @@
 
   const state = getDefaultState();
 
-  const avatarContainer = document.getElementById('avatarContainer');
-  const avatarRing = document.getElementById('avatarRing');
+  const previewCanvas = document.getElementById('previewCanvas');
   const avatarImg = document.getElementById('avatarImg');
+
+  avatarImg.onload = function() {
+    updateAvatar();
+  };
+
+  async function loadImageSrc(src) {
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        avatarImg.src = e.target.result;
+      };
+      reader.readAsDataURL(blob);
+    } catch (err) {
+      avatarImg.src = src;
+    }
+  }
+
+  function updateAllImages(src) {
+    state.currentSrc = src;
+    if (src.startsWith('data:image')) {
+      avatarImg.src = src;
+    } else {
+      loadImageSrc(src);
+    }
+  }
 
   function getCssFilterString(filterName) {
     switch(filterName) {
@@ -563,46 +525,213 @@
     }
   }
 
+  // ===== Unified Canvas Drawing Function with Perfect HiDPI Support =====
+  function drawAvatarToCanvas(canvas, logicalSize) {
+    const isExport = canvas.id === 'exportCanvas';
+    const dpr = isExport ? 1 : (window.devicePixelRatio || 1);
+
+    canvas.width = logicalSize * dpr;
+    canvas.height = logicalSize * dpr;
+    canvas.style.width = logicalSize + 'px';
+    canvas.style.height = logicalSize + 'px';
+    
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    var bgGradients = {
+      'dark': '#0a0e1a', 'light': '#e8f0ff',
+      'gradient1': ['#0c1929', '#1a2744'], 'gradient2': ['#0f172a', '#1e1b4b'],
+      'gradient3': ['#042f2e', '#0c4a6e'], 'gradient4': ['#1e1b4b', '#312e81'],
+      'gradient5': ['#0a0e1a', '#164e63'], 'none': null
+    };
+
+    var bgVal = bgGradients[state.bg];
+    var widths = { thin: logicalSize * 0.02, medium: logicalSize * 0.04, thick: logicalSize * 0.07 };
+    var w = (state.ring !== 'none') ? (widths[state.ringWidth] || widths.medium) : 0;
+    var drawMargin = w / 2;
+    var drawSize = logicalSize - (drawMargin * 2);
+
+    ctx.clearRect(0, 0, logicalSize, logicalSize);
+
+    // 1. Draw Background & Image inside Clip
+    ctx.save();
+    ctx.beginPath();
+    drawShapePath(ctx, logicalSize, state.shape, drawMargin);
+    ctx.clip();
+
+    if (bgVal !== null) {
+      if (Array.isArray(bgVal)) {
+        var grad = ctx.createLinearGradient(0, 0, logicalSize, logicalSize);
+        grad.addColorStop(0, bgVal[0]);
+        grad.addColorStop(1, bgVal[1]);
+        ctx.fillStyle = grad;
+      } else {
+        ctx.fillStyle = bgVal;
+      }
+      ctx.fillRect(drawMargin, drawMargin, drawSize, drawSize);
+    }
+
+    var scale = state.scale / 100;
+    var imgSize = drawSize * scale;
+    
+    var offsetX = (state.posX / 100) * drawSize;
+    var finalYState = state.posY - state.up + state.down;
+    var offsetY = (finalYState / 100) * drawSize;
+    
+    var baseX = drawMargin + (drawSize - imgSize) / 2 + offsetX;
+    var baseY = drawMargin + (drawSize - imgSize) / 2 + offsetY;
+
+    ctx.save();
+    
+    if (state.filter !== 'none') {
+      try { ctx.filter = getCssFilterString(state.filter); } catch (err) { console.warn('Canvas filter not supported.'); }
+    }
+    
+    ctx.translate(logicalSize / 2, logicalSize / 2);
+    ctx.rotate((state.rotation * Math.PI) / 180);
+    ctx.translate(-logicalSize / 2, -logicalSize / 2);
+    
+    try {
+      if (avatarImg.complete && avatarImg.naturalWidth !== 0) {
+        ctx.drawImage(avatarImg, baseX, baseY, imgSize, imgSize);
+      }
+    } catch (err) {
+      console.warn('Image not loaded yet or cross-origin.');
+    }
+    
+    ctx.filter = 'none';
+    ctx.restore();
+
+    // Overlays
+    if (state.overlay === 'gradient') {
+      var og = ctx.createLinearGradient(0, drawMargin, 0, drawMargin + drawSize);
+      og.addColorStop(0, 'rgba(10, 14, 26, 0)');
+      og.addColorStop(0.4, 'rgba(10, 14, 26, 0)');
+      og.addColorStop(1, 'rgba(10, 14, 26, 0.7)');
+      ctx.fillStyle = og;
+      ctx.fillRect(drawMargin, drawMargin, drawSize, drawSize);
+    } else if (state.overlay === 'vignette') {
+      var radius = drawSize * 0.5;
+      var ov = ctx.createRadialGradient(logicalSize/2, logicalSize/2, radius * 0.3, logicalSize/2, logicalSize/2, radius * 1.2);
+      ov.addColorStop(0, 'rgba(10, 14, 26, 0)');
+      ov.addColorStop(1, 'rgba(10, 14, 26, 0.8)');
+      ctx.fillStyle = ov;
+      ctx.fillRect(0, 0, logicalSize, logicalSize);
+    } else if (state.overlay === 'inner') {
+      ctx.shadowColor = 'rgba(10, 14, 26, 0.6)';
+      ctx.shadowBlur = 30;
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = 'rgba(10, 14, 26, 0.1)';
+      ctx.strokeRect(drawMargin, drawMargin, drawSize, drawSize);
+    }
+
+    ctx.restore();
+
+    // 2. Draw Ring on Top (Outside the image clip)
+    if (state.ring !== 'none') {
+      drawRingOnCanvas(ctx, logicalSize, w, drawMargin);
+    }
+  }
+
+  function drawShapePath(ctx, size, shape, margin) {
+    margin = margin || 0;
+    var cx = size / 2, cy = size / 2, r = Math.max(1, (size / 2) - margin);
+    var drawSize = size - (margin * 2);
+    
+    switch (shape) {
+      case 'circle': ctx.arc(cx, cy, r, 0, Math.PI * 2); break;
+      case 'rounded': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.1); break;
+      case 'square': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.03); break;
+      case 'ios': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.22); break;
+      case 'hexagon': polygon(ctx, cx, cy, r, 6, -Math.PI / 2); break;
+      case 'diamond': polygon(ctx, cx, cy, r, 4, -Math.PI / 2); break;
+      case 'octagon': polygon(ctx, cx, cy, r, 8, -Math.PI / 2 + Math.PI / 8); break;
+    }
+  }
+
+  // Upgraded to use arcTo for flawless, notch-free rounded corners
+  function roundRect(ctx, x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function polygon(ctx, cx, cy, r, sides, startAngle) {
+    for (var i = 0; i < sides; i++) {
+      var angle = startAngle + (2 * Math.PI * i) / sides;
+      var x = cx + r * Math.cos(angle);
+      var y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+  }
+
+  // ===== Notch-Free Ring Drawing Logic =====
+  function drawRingOnCanvas(ctx, size, w, drawMargin) {
+    var colors = {
+      ice: ['#4ec8f0', '#0ea5e9', '#a06cf0', '#4ec8f0'],
+      frost: ['#e0f2fe', '#7dd3fc', '#0ea5e9', '#7dd3fc', '#e0f2fe'],
+      aurora: ['#34d399', '#4ec8f0', '#a06cf0', '#f472b6', '#34d399'],
+      gold: ['#fbbf24', '#f59e0b', '#d97706', '#f59e0b', '#fbbf24'],
+      crystal: ['rgba(78,200,240,0.2)', 'rgba(78,200,240,0.8)', 'rgba(78,200,240,0.2)', 'rgba(78,200,240,0.8)', 'rgba(78,200,240,0.2)'],
+      nebula: ['#6366f1', '#8b5cf6', '#ec4899', '#8b5cf6', '#6366f1'],
+      rose: ['#fda4af', '#fb7185', '#e11d48', '#fb7185', '#fda4af'],
+      sunset: ['#fb923c', '#ef4444', '#ec4899', '#fb923c'],
+      emerald: ['#6ee7b7', '#10b981', '#047857', '#10b981', '#6ee7b7'],
+      solar: ['#fef08a', '#facc15', '#eab308', '#facc15', '#fef08a'],
+      ocean: ['#67e8f9', '#06b6d4', '#0e7490', '#06b6d4', '#67e8f9'],
+      candy: ['#f9a8d4', '#a78bfa', '#67e8f9', '#f9a8d4'],
+      plasma: ['#ff00cc', '#3333ff', '#00ffff', '#3333ff', '#ff00cc'],
+      metal: ['#e2e8f0', '#94a3b8', '#475569', '#94a3b8', '#e2e8f0']
+    };
+    var ringColors = colors[state.ring] || colors.ice;
+    var cx = size / 2, cy = size / 2;
+
+    var grad = ctx.createConicGradient(0, cx, cy);
+    var step = 1 / ringColors.length;
+    ringColors.forEach(function(c, i) {
+      grad.addColorStop(i * step, c);
+    });
+    grad.addColorStop(1, ringColors[0]);
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+
+    // 1. Draw the OUTER shape (full icon size)
+    drawShapePath(ctx, size, state.shape, 0);
+
+    // 2. Draw the INNER shape (cutting out the middle to leave a perfect ring)
+    drawShapePath(ctx, size, state.shape, drawMargin);
+    
+    ctx.fill('evenodd');
+  }
+
   // ===== Update Avatar UI =====
   function updateAvatar() {
-    avatarContainer.className = 'avatar-container shape-' + state.shape +
-      ' avatar-bg-' + state.bg + ' overlay-' + state.overlay;
-
-    avatarRing.className = 'avatar-ring ring-' + state.ring + ' ring-' + state.ringWidth + ' shape-' + state.shape;
-
-    var cssFilter = getCssFilterString(state.filter);
-    avatarImg.style.filter = cssFilter;
-    
-    // Calculate final Y position combining Y Pos, Image Up, and Image Down
-    var finalY = state.posY - state.up + state.down;
-    avatarImg.style.transform = 'rotate(' + state.rotation + 'deg) scale(' + (state.scale / 100) + ') translate(' + state.posX + '%, ' + finalY + '%)';
-
-    document.querySelectorAll('.mini-avatar').forEach(function(m) {
-      m.className = 'mini-avatar shape-' + state.shape + ' avatar-bg-' + state.bg + ' overlay-' + state.overlay;
-      var img = m.querySelector('img');
-      if (img) {
-        img.style.filter = cssFilter;
-      }
+    drawAvatarToCanvas(previewCanvas, 160);
+    document.querySelectorAll('.mini-canvas').forEach(function(c) {
+      drawAvatarToCanvas(c, parseInt(c.dataset.size));
     });
   }
 
-  function updateAllImages(src) {
-    state.currentSrc = src;
-    avatarImg.src = src;
-    document.querySelectorAll('.mini-avatar img').forEach(function(img) {
-      img.src = src;
-    });
-  }
-
-  // ===== Event Listeners for Buttons =====
-  function setupOptionGroup(containerId, stateKey, callback) {
+  // ===== Event Listeners =====
+  function setupOptionGroup(containerId, stateKey, datasetKey, callback) {
     var container = document.getElementById(containerId);
     container.addEventListener('click', function(e) {
       var btn = e.target.closest('.option-btn, .bg-color-btn');
       if (!btn) return;
       container.querySelectorAll('.option-btn, .bg-color-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      var value = btn.dataset[stateKey];
+      var value = btn.dataset[datasetKey];
       if (value !== undefined) {
         state[stateKey] = value;
         updateAvatar();
@@ -611,11 +740,11 @@
     });
   }
 
-  setupOptionGroup('shapeOptions', 'shape');
-  setupOptionGroup('ringOptions', 'ring');
-  setupOptionGroup('ringWidthOptions', 'width', function(v) { state.ringWidth = v; });
-  setupOptionGroup('filterOptions', 'filter');
-  setupOptionGroup('overlayOptions', 'overlay');
+  setupOptionGroup('shapeOptions', 'shape', 'shape');
+  setupOptionGroup('ringOptions', 'ring', 'ring');
+  setupOptionGroup('ringWidthOptions', 'ringWidth', 'width');
+  setupOptionGroup('filterOptions', 'filter', 'filter');
+  setupOptionGroup('overlayOptions', 'overlay', 'overlay');
 
   document.getElementById('bgOptions').addEventListener('click', function(e) {
     var btn = e.target.closest('.bg-color-btn');
@@ -634,41 +763,12 @@
   var upSlider = document.getElementById('upSlider');
   var downSlider = document.getElementById('downSlider');
 
-  rotationSlider.addEventListener('input', function() {
-    state.rotation = parseInt(rotationSlider.value);
-    document.getElementById('rotationVal').textContent = state.rotation + '\u00B0';
-    updateAvatar();
-  });
-
-  scaleSlider.addEventListener('input', function() {
-    state.scale = parseInt(scaleSlider.value);
-    document.getElementById('scaleVal').textContent = state.scale + '%';
-    updateAvatar();
-  });
-
-  xSlider.addEventListener('input', function() {
-    state.posX = parseInt(xSlider.value);
-    document.getElementById('xVal').textContent = state.posX;
-    updateAvatar();
-  });
-
-  ySlider.addEventListener('input', function() {
-    state.posY = parseInt(ySlider.value);
-    document.getElementById('yVal').textContent = state.posY;
-    updateAvatar();
-  });
-
-  upSlider.addEventListener('input', function() {
-    state.up = parseInt(upSlider.value);
-    document.getElementById('upVal').textContent = state.up;
-    updateAvatar();
-  });
-
-  downSlider.addEventListener('input', function() {
-    state.down = parseInt(downSlider.value);
-    document.getElementById('downVal').textContent = state.down;
-    updateAvatar();
-  });
+  rotationSlider.addEventListener('input', function() { state.rotation = parseInt(rotationSlider.value); document.getElementById('rotationVal').textContent = state.rotation + '\u00B0'; updateAvatar(); });
+  scaleSlider.addEventListener('input', function() { state.scale = parseInt(scaleSlider.value); document.getElementById('scaleVal').textContent = state.scale + '%'; updateAvatar(); });
+  xSlider.addEventListener('input', function() { state.posX = parseInt(xSlider.value); document.getElementById('xVal').textContent = state.posX; updateAvatar(); });
+  ySlider.addEventListener('input', function() { state.posY = parseInt(ySlider.value); document.getElementById('yVal').textContent = state.posY; updateAvatar(); });
+  upSlider.addEventListener('input', function() { state.up = parseInt(upSlider.value); document.getElementById('upVal').textContent = state.up; updateAvatar(); });
+  downSlider.addEventListener('input', function() { state.down = parseInt(downSlider.value); document.getElementById('downVal').textContent = state.down; updateAvatar(); });
 
   function showToast(msg) {
     var toast = document.getElementById('toast');
@@ -684,20 +784,13 @@
   var fileNameEl = document.getElementById('fileName');
   var removeFileBtn = document.getElementById('removeFileBtn');
 
-  ['dragover', 'drop'].forEach(function(eventName) {
-    window.addEventListener(eventName, function(e) { e.preventDefault(); e.stopPropagation(); }, false);
-  });
+  ['dragover', 'drop'].forEach(function(eventName) { window.addEventListener(eventName, function(e) { e.preventDefault(); e.stopPropagation(); }, false); });
 
   uploadZone.addEventListener('click', function() { fileInput.click(); });
-  fileInput.addEventListener('change', function(e) {
-    if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
-  });
+  fileInput.addEventListener('change', function(e) { if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]); });
   uploadZone.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); uploadZone.classList.add('drag-over'); });
   uploadZone.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('drag-over'); });
-  uploadZone.addEventListener('drop', function(e) {
-    e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('drag-over');
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-  });
+  uploadZone.addEventListener('drop', function(e) { e.preventDefault(); e.stopPropagation(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
 
   function handleFile(file) {
     if (!file.type.startsWith('image/')) { showToast('Please upload an image file (PNG, JPG, SVG, WebP)'); return; }
@@ -722,116 +815,62 @@
     showToast('Reverted to default image');
   });
 
-  // ===== Reset Logic =====
-  const resetBtn = document.getElementById('resetBtn');
-  resetBtn.addEventListener('click', () => {
-    // Reset state object
+  document.getElementById('resetBtn').addEventListener('click', () => {
     Object.assign(state, getDefaultState());
-
-    // Reset UI Buttons Helper
-    const resetGroupUI = (containerId, key, datasetKey) => {
-      const container = document.getElementById(containerId);
-      container.querySelectorAll('.option-btn, .bg-color-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset[datasetKey] === state[key]);
+    const resetGroupUI = (containerId, stateKey, datasetKey) => {
+      document.getElementById(containerId).querySelectorAll('.option-btn, .bg-color-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset[datasetKey] === state[stateKey]);
       });
     };
-    
     resetGroupUI('shapeOptions', 'shape', 'shape');
     resetGroupUI('ringOptions', 'ring', 'ring');
     resetGroupUI('ringWidthOptions', 'ringWidth', 'width');
     resetGroupUI('filterOptions', 'filter', 'filter');
     resetGroupUI('overlayOptions', 'overlay', 'overlay');
-    
-    // Reset Background Buttons
-    document.querySelectorAll('.bg-color-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.bg === state.bg);
-    });
+    document.querySelectorAll('.bg-color-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.bg === state.bg));
 
-    // Reset Sliders
-    document.getElementById('rotationSlider').value = state.rotation;
-    document.getElementById('rotationVal').textContent = state.rotation + '°';
-    
-    document.getElementById('scaleSlider').value = state.scale;
-    document.getElementById('scaleVal').textContent = state.scale + '%';
-    
-    document.getElementById('xSlider').value = state.posX;
-    document.getElementById('xVal').textContent = state.posX;
-    
-    document.getElementById('ySlider').value = state.posY;
-    document.getElementById('yVal').textContent = state.posY;
-    
-    document.getElementById('upSlider').value = state.up;
-    document.getElementById('upVal').textContent = state.up;
-    
-    document.getElementById('downSlider').value = state.down;
-    document.getElementById('downVal').textContent = state.down;
+    document.getElementById('rotationSlider').value = state.rotation; document.getElementById('rotationVal').textContent = state.rotation + '°';
+    document.getElementById('scaleSlider').value = state.scale; document.getElementById('scaleVal').textContent = state.scale + '%';
+    document.getElementById('xSlider').value = state.posX; document.getElementById('xVal').textContent = state.posX;
+    document.getElementById('ySlider').value = state.posY; document.getElementById('yVal').textContent = state.posY;
+    document.getElementById('upSlider').value = state.up; document.getElementById('upVal').textContent = state.up;
+    document.getElementById('downSlider').value = state.down; document.getElementById('downVal').textContent = state.down;
 
-    // Reset Image & File Info
     updateAllImages(DEFAULT_IMG_SRC);
     fileInfo.classList.remove('visible');
     fileInput.value = '';
-    
-    // Apply to avatar
     updateAvatar();
     showToast('Studio reset to default!');
   });
 
-  // ===== Template Modal Logic (Dynamic GitHub API Fetch & Base64 Convert) =====
   const templateModal = document.getElementById('templateModal');
-  const openTemplatesBtn = document.getElementById('openTemplatesBtn');
-  const closeModalBtn = document.getElementById('closeModalBtn');
   const templateGallery = document.getElementById('templateGallery');
 
-  // Fetch images directly from your GitHub folder
   async function loadTemplates() {
     templateGallery.innerHTML = '<p style="color: var(--muted); grid-column: 1 / -1; text-align: center;">Loading templates...</p>';
-    
-    // Updated GitHub API endpoint for your new "Template" folder
     const apiUrl = 'https://api.github.com/repos/chris1111/Icon-Studio/contents/Pics/Template';
-    
     try {
       const response = await fetch(apiUrl);
       if (!response.ok) throw new Error('Network response was not ok');
-      
       const files = await response.json();
-      // Filter out subdirectories and non-image files
       const imageFiles = files.filter(file => file.type === 'file' && /\.(png|jpg|jpeg|webp|svg|gif)$/i.test(file.name));
-      
-      templateGallery.innerHTML = ''; // Clear loading text
-      
-      if (imageFiles.length === 0) {
-        templateGallery.innerHTML = '<p style="color: var(--muted); grid-column: 1 / -1; text-align: center;">No images found in folder.</p>';
-        return;
-      }
+      templateGallery.innerHTML = '';
+      if (imageFiles.length === 0) { templateGallery.innerHTML = '<p style="color: var(--muted); grid-column: 1 / -1; text-align: center;">No images found in folder.</p>'; return; }
 
-      // Create a card for each image found
       imageFiles.forEach(file => {
         const card = document.createElement('div');
         card.className = 'template-card';
-        
-        // file.download_url is the direct raw link to the image
         const imgUrl = file.download_url;
-        const cleanName = file.name.replace(/\.[^/.]+$/, ""); // Remove file extension for display name
-        
-        card.innerHTML = `
-          <img src="${imgUrl}" alt="${cleanName}" loading="lazy">
-          <div class="template-name">${cleanName}</div>
-        `;
-        
-        // Fetch as Base64 to bypass Canvas Cross-Origin Taint Error
+        const cleanName = file.name.replace(/\.[^/.]+$/, "");
+        card.innerHTML = `<img src="${imgUrl}" alt="${cleanName}" loading="lazy"><div class="template-name">${cleanName}</div>`;
         card.addEventListener('click', async () => {
           templateModal.classList.remove('active');
           showToast('Loading ' + cleanName + ' template...');
-          
           try {
-            // Fetch the image as a blob
             const imgResponse = await fetch(imgUrl);
             const blob = await imgResponse.blob();
-            
-            // Convert blob to base64 data URL
             const reader = new FileReader();
             reader.onload = function(e) {
-              // e.target.result is the base64 string
               updateAllImages(e.target.result);
               state.isUploaded = true;
               fileNameEl.textContent = file.name + ' (Template)';
@@ -839,44 +878,29 @@
               showToast(cleanName + ' template loaded!');
             };
             reader.readAsDataURL(blob);
-          } catch (err) {
-            console.error('Error loading template image:', err);
-            showToast('Failed to load template image.');
-          }
+          } catch (err) { console.error('Error loading template image:', err); showToast('Failed to load template image.'); }
         });
-        
         templateGallery.appendChild(card);
       });
-    } catch (error) {
-      console.error('Error fetching templates:', error);
-      templateGallery.innerHTML = '<p style="color: #f87171; grid-column: 1 / -1; text-align: center;">Error loading templates from GitHub.</p>';
-    }
+    } catch (error) { console.error('Error fetching templates:', error); templateGallery.innerHTML = '<p style="color: #f87171; grid-column: 1 / -1; text-align: center;">Error loading templates from GitHub.</p>'; }
   }
 
-  // Load templates as soon as the page loads
   loadTemplates();
 
-  openTemplatesBtn.addEventListener('click', () => templateModal.classList.add('active'));
-  closeModalBtn.addEventListener('click', () => templateModal.classList.remove('active'));
-  templateModal.addEventListener('click', (e) => {
-    if (e.target === templateModal) templateModal.classList.remove('active');
-  });
+  document.getElementById('openTemplatesBtn').addEventListener('click', () => templateModal.classList.add('active'));
+  document.getElementById('closeModalBtn').addEventListener('click', () => templateModal.classList.remove('active'));
+  templateModal.addEventListener('click', (e) => { if (e.target === templateModal) templateModal.classList.remove('active'); });
 
-  // ===== Preset Save/Load Logic =====
   window.savePreset = function() {
     const presetData = { ...state };
     delete presetData.currentSrc;
     delete presetData.isUploaded;
-
     const dataStr = JSON.stringify(presetData, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'icon-studio-preset.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.href = url; a.download = 'icon-studio-preset.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
     showToast('Preset file saved to your computer!');
   };
@@ -884,259 +908,54 @@
   document.getElementById('loadPresetInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = function(event) {
       try {
         const loadedState = JSON.parse(event.target.result);
-        
-        // Merge loaded state
         Object.assign(state, loadedState);
-        
-        // Helper to update UI buttons
-        function updateGroupUI(containerId, key, datasetKey) {
-          const container = document.getElementById(containerId);
-          container.querySelectorAll('.option-btn, .bg-color-btn').forEach(btn => {
-            const stateVal = key === 'ringWidth' ? state.ringWidth : state[key];
-            btn.classList.toggle('active', btn.dataset[datasetKey] === stateVal);
+        function updateGroupUI(containerId, stateKey, datasetKey) {
+          document.getElementById(containerId).querySelectorAll('.option-btn, .bg-color-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset[datasetKey] === state[stateKey]);
           });
         }
-        
         updateGroupUI('shapeOptions', 'shape', 'shape');
         updateGroupUI('ringOptions', 'ring', 'ring');
         updateGroupUI('ringWidthOptions', 'ringWidth', 'width');
         updateGroupUI('filterOptions', 'filter', 'filter');
         updateGroupUI('overlayOptions', 'overlay', 'overlay');
+        document.querySelectorAll('.bg-color-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.bg === state.bg));
         
-        // Background buttons
-        document.querySelectorAll('.bg-color-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.bg === state.bg);
-        });
+        document.getElementById('rotationSlider').value = state.rotation; document.getElementById('rotationVal').textContent = state.rotation + '°';
+        document.getElementById('scaleSlider').value = state.scale; document.getElementById('scaleVal').textContent = state.scale + '%';
+        document.getElementById('xSlider').value = state.posX; document.getElementById('xVal').textContent = state.posX;
+        document.getElementById('ySlider').value = state.posY; document.getElementById('yVal').textContent = state.posY;
+        document.getElementById('upSlider').value = state.up; document.getElementById('upVal').textContent = state.up;
+        document.getElementById('downSlider').value = state.down; document.getElementById('downVal').textContent = state.down;
         
-        // Update Sliders
-        document.getElementById('rotationSlider').value = state.rotation;
-        document.getElementById('rotationVal').textContent = state.rotation + '°';
-        
-        document.getElementById('scaleSlider').value = state.scale;
-        document.getElementById('scaleVal').textContent = state.scale + '%';
-        
-        document.getElementById('xSlider').value = state.posX;
-        document.getElementById('xVal').textContent = state.posX;
-        
-        document.getElementById('ySlider').value = state.posY;
-        document.getElementById('yVal').textContent = state.posY;
-        
-        document.getElementById('upSlider').value = state.up;
-        document.getElementById('upVal').textContent = state.up;
-        
-        document.getElementById('downSlider').value = state.down;
-        document.getElementById('downVal').textContent = state.down;
-        
-        // Apply to avatar
         updateAvatar();
         showToast('Preset loaded successfully!');
-      } catch (err) {
-        showToast('Invalid preset file format.');
-        console.error("Error loading preset:", err);
-      }
+      } catch (err) { showToast('Invalid preset file format.'); console.error("Error loading preset:", err); }
     };
     reader.readAsText(file);
-    e.target.value = ''; // Reset input
+    e.target.value = '';
   });
 
   // ===== Canvas Export Logic =====
   function downloadAvatar(size) {
     var canvas = document.getElementById('exportCanvas');
-    canvas.width = size;
-    canvas.height = size;
-    var ctx = canvas.getContext('2d');
-
-    var bgGradients = {
-      'dark': '#0a0e1a', 'light': '#e8f0ff',
-      'gradient1': ['#0c1929', '#1a2744'], 'gradient2': ['#0f172a', '#1e1b4b'],
-      'gradient3': ['#042f2e', '#0c4a6e'], 'gradient4': ['#1e1b4b', '#312e81'],
-      'gradient5': ['#0a0e1a', '#164e63'], 'none': null
-    };
-
-    var bgVal = bgGradients[state.bg];
-    var widths = { thin: size * 0.02, medium: size * 0.04, thick: size * 0.07 };
-    var w = (state.ring !== 'none') ? (widths[state.ringWidth] || widths.medium) : 0;
-    var drawMargin = w / 2;
-    var drawSize = size - (drawMargin * 2);
-
-    ctx.clearRect(0, 0, size, size);
-
-    // 1. Draw Background & Image inside Clip
-    ctx.save();
-    ctx.beginPath();
-    drawShapePath(ctx, size, state.shape, drawMargin);
-    ctx.clip();
-
-    if (bgVal !== null) {
-      if (Array.isArray(bgVal)) {
-        var grad = ctx.createLinearGradient(0, 0, size, size);
-        grad.addColorStop(0, bgVal[0]);
-        grad.addColorStop(1, bgVal[1]);
-        ctx.fillStyle = grad;
-      } else {
-        ctx.fillStyle = bgVal;
-      }
-      ctx.fillRect(drawMargin, drawMargin, drawSize, drawSize);
-    }
-
-    var img = document.getElementById('avatarImg');
-    var scale = state.scale / 100;
-    var imgSize = drawSize * scale;
-    
-    var offsetX = (state.posX / 100) * drawSize;
-    // Incorporate Up and Down into the final Y offset for canvas drawing
-    var finalYState = state.posY - state.up + state.down;
-    var offsetY = (finalYState / 100) * drawSize;
-    
-    var baseX = drawMargin + (drawSize - imgSize) / 2 + offsetX;
-    var baseY = drawMargin + (drawSize - imgSize) / 2 + offsetY;
-
-    ctx.save();
-    
-    if (state.filter !== 'none') {
-      try { ctx.filter = getCssFilterString(state.filter); } catch (err) { console.warn('Canvas filter not supported.'); }
-    }
-    
-    ctx.translate(size / 2, size / 2);
-    ctx.rotate((state.rotation * Math.PI) / 180);
-    ctx.translate(-size / 2, -size / 2);
-    
-    try {
-      ctx.drawImage(img, baseX, baseY, imgSize, imgSize);
-    } catch (err) {
-      showToast('Download failed — cross-origin image. Try uploading first.');
-      return;
-    }
-    
-    ctx.filter = 'none';
-    ctx.restore();
-
-    // Overlays
-    if (state.overlay === 'gradient') {
-      var og = ctx.createLinearGradient(0, drawMargin, 0, drawMargin + drawSize);
-      og.addColorStop(0, 'rgba(10, 14, 26, 0)');
-      og.addColorStop(0.4, 'rgba(10, 14, 26, 0)');
-      og.addColorStop(1, 'rgba(10, 14, 26, 0.7)');
-      ctx.fillStyle = og;
-      ctx.fillRect(drawMargin, drawMargin, drawSize, drawSize);
-    } else if (state.overlay === 'vignette') {
-      var radius = drawSize * 0.5;
-      var ov = ctx.createRadialGradient(size/2, size/2, radius * 0.3, size/2, size/2, radius * 1.2);
-      ov.addColorStop(0, 'rgba(10, 14, 26, 0)');
-      ov.addColorStop(1, 'rgba(10, 14, 26, 0.8)');
-      ctx.fillStyle = ov;
-      ctx.fillRect(0, 0, size, size);
-    } else if (state.overlay === 'inner') {
-      ctx.shadowColor = 'rgba(10, 14, 26, 0.6)';
-      ctx.shadowBlur = 30;
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = 'rgba(10, 14, 26, 0.1)';
-      ctx.strokeRect(drawMargin, drawMargin, drawSize, drawSize);
-    }
-
-    ctx.restore();
-
-    // 2. Draw Ring on Top (Outside the image clip)
-    if (state.ring !== 'none') {
-      drawRingOnCanvas(ctx, size, w, drawMargin);
-    }
+    drawAvatarToCanvas(canvas, size);
 
     try {
       canvas.toBlob(function(blob) {
         if (!blob) { showToast('Download failed — try right-clicking the avatar to save'); return; }
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
-        a.href = url;
-        a.download = 'Image-' + size + 'x' + size + '.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.href = url; a.download = 'Image-' + size + 'x' + size + '.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
         showToast('Icon downloaded (' + size + 'x' + size + 'px)');
       }, 'image/png');
-    } catch (e) {
-      showToast('Download failed — cross-origin image. Try uploading first.');
-    }
-  }
-
-  function drawShapePath(ctx, size, shape, margin) {
-    margin = margin || 0;
-    var cx = size / 2, cy = size / 2, r = Math.max(1, (size / 2) - margin);
-    var drawSize = size - (margin * 2);
-    
-    switch (shape) {
-      case 'circle': ctx.arc(cx, cy, r, 0, Math.PI * 2); break;
-      case 'rounded': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.1); break;
-      case 'square': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.03); break;
-      case 'ios': roundRect(ctx, margin, margin, drawSize, drawSize, drawSize * 0.22); break;
-      case 'hexagon': polygon(ctx, cx, cy, r, 6, -Math.PI / 2); break;
-      case 'diamond': polygon(ctx, cx, cy, r, 4, -Math.PI / 2); break;
-      case 'octagon': polygon(ctx, cx, cy, r, 8, -Math.PI / 2 + Math.PI / 8); break;
-    }
-  }
-
-  function roundRect(ctx, x, y, w, h, r) {
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-  }
-
-  function polygon(ctx, cx, cy, r, sides, startAngle) {
-    for (var i = 0; i < sides; i++) {
-      var angle = startAngle + (2 * Math.PI * i) / sides;
-      var x = cx + r * Math.cos(angle);
-      var y = cy + r * Math.sin(angle);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-  }
-
-  function drawRingOnCanvas(ctx, size, w, drawMargin) {
-    var colors = {
-      ice: ['#4ec8f0', '#0ea5e9', '#a06cf0', '#4ec8f0'],
-      frost: ['#e0f2fe', '#7dd3fc', '#0ea5e9', '#7dd3fc', '#e0f2fe'],
-      aurora: ['#34d399', '#4ec8f0', '#a06cf0', '#f472b6', '#34d399'],
-      gold: ['#fbbf24', '#f59e0b', '#d97706', '#f59e0b', '#fbbf24'],
-      crystal: ['rgba(78,200,240,0.2)', 'rgba(78,200,240,0.8)', 'rgba(78,200,240,0.2)', 'rgba(78,200,240,0.8)', 'rgba(78,200,240,0.2)'],
-      nebula: ['#6366f1', '#8b5cf6', '#ec4899', '#8b5cf6', '#6366f1'],
-      rose: ['#fda4af', '#fb7185', '#e11d48', '#fb7185', '#fda4af'],
-      sunset: ['#fb923c', '#ef4444', '#ec4899', '#fb923c'],
-      emerald: ['#6ee7b7', '#10b981', '#047857', '#10b981', '#6ee7b7'],
-      solar: ['#fef08a', '#facc15', '#eab308', '#facc15', '#fef08a'],
-      ocean: ['#67e8f9', '#06b6d4', '#0e7490', '#06b6d4', '#67e8f9'],
-      candy: ['#f9a8d4', '#a78bfa', '#67e8f9', '#f9a8d4'],
-      plasma: ['#ff00cc', '#3333ff', '#00ffff', '#3333ff', '#ff00cc'],
-      // NEW: Metal array for canvas drawing
-      metal: ['#e2e8f0', '#94a3b8', '#475569', '#94a3b8', '#e2e8f0']
-    };
-    var ringColors = colors[state.ring] || colors.ice;
-    var cx = size / 2, cy = size / 2;
-
-    var grad = ctx.createConicGradient(0, cx, cy);
-    var step = 1 / ringColors.length;
-    ringColors.forEach(function(c, i) {
-      grad.addColorStop(i * step, c);
-    });
-    grad.addColorStop(1, ringColors[0]);
-
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = w;
-    
-    ctx.beginPath();
-    drawShapePath(ctx, size, state.shape, drawMargin);
-    ctx.stroke();
+    } catch (e) { showToast('Download failed — cross-origin image. Try uploading first.'); }
   }
 
   // Mouse Glow Effect
@@ -1148,14 +967,10 @@
     var glow = document.getElementById('avatarGlow');
     glow.style.transform = 'translate(' + (x * 20) + 'px, ' + (y * 20) + 'px) scale(1.05)';
   });
-
-  avatarStage.addEventListener('mouseleave', function() {
-    var glow = document.getElementById('avatarGlow');
-    glow.style.transform = '';
-  });
+  avatarStage.addEventListener('mouseleave', function() { document.getElementById('avatarGlow').style.transform = ''; });
 
   // Init
-  updateAvatar();
+  loadImageSrc(DEFAULT_IMG_SRC);
 </script>
 </body>
 </html>

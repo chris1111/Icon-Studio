@@ -6,7 +6,20 @@
 
 ### Create your unique icon or avatar with custom shapes, rings, and effects.
 
+## List Update: ⬇︎
+<details> 
+  <summary>View Update</summary>
+
 ### Update 17 Aug 2026 Add Template images.
+
+### Update 18 Aug 2026 Fix bug.
+
+	1	100% WYSIWYG (What You See Is What You Get): We completely rebuilt the preview system. The live preview now uses the exact same Canvas API math as the download engine. The border thickness (Thin/Medium/Thick) you see on screen is exactly what you get in the downloaded PNG.
+	2	Flawless, Notch-Free Borders: We fixed the ugly jagged corners on the Square, iOS, and Rounded shapes. By using the arcTo method and the evenodd ring-punching logic, the borders are now perfectly clean and smooth.
+	3	HiDPI Crispness: We implemented High-Definition rendering so the canvas looks sharp on Retina screens.
+
+</details>
+
 
 1. Image Upload and Preview
 Users can upload their own image via drag-and-drop or file browsing (supports PNG, JPG, ICO, SVG, WebP).
