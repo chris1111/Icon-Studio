@@ -25,6 +25,21 @@
 
 </details>
 
+### Here is an example of the choices I made for the image created below.
+
+    1       Loading 1-Puppy from Template
+    2       Image Effect = Film Grain
+    3       Background = Transparent
+    4       Border Shaper = IOS
+    5       Icon Color = Metal
+    6       Icon Width = Thick
+    7       Download = 256px
+	
+<img width="128" height="128" alt="Image" src="https://github.com/user-attachments/assets/0cef82f6-d5f4-4074-a4a7-14066b7e5dea" />
+
+-------------------------------------------
+
+
 
 ### Description of the Icon Studio project
 
