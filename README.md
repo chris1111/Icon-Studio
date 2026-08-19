@@ -28,6 +28,8 @@
 </details>
 
 
+### Description of the Icon Studio project
+
 1. Image Upload and Preview
 Users can upload their own image via drag-and-drop or file browsing (supports PNG, JPG, ICO, SVG, WebP).
 The page provides a large, live preview of the image alongside smaller previews showing how the icon will look at standard smaller sizes (128px, 64px, 40px, 28px).
