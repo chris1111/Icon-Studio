@@ -33,7 +33,8 @@
     4       Border Shaper = IOS
     5       Icon Color = Metal
     6       Icon Width = Thick
-    7       Download = 256px
+	7       Download = 256px
+    ⚙️      Al the others settings default
 	
 <img src="https://github.com/user-attachments/assets/1693b1cf-bb89-4061-8e40-d17849d4461f" />
 
