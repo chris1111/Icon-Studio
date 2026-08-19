@@ -35,7 +35,8 @@
     6       Icon Width = Thick
     7       Download = 256px
 	
-<img width="128" height="128" alt="Image" src="https://github.com/user-attachments/assets/0cef82f6-d5f4-4074-a4a7-14066b7e5dea" />
+<img src="https://github.com/user-attachments/assets/1693b1cf-bb89-4061-8e40-d17849d4461f" />
+
 
 -------------------------------------------
 
