@@ -10,8 +10,15 @@
 <details> 
   <summary>View Update</summary>
 
-### Update 17 Aug 2026 Add Template images.
+### Update 16 Aug 2026 Add Film Grain Effect, Frosted Glass Effect, Low Frosty" Tweak
 
+	1	Film Grain Effect: We added a textured, vintage noise overlay to the "Image Effects" list. It gives the icons a really premium, gritty camera texture.
+	2	Frosted Glass Effect: We added a glassmorphism effect (blurs the image slightly and adds a frosty tint) to the "Image Effects" list.
+	3	"Low Frosty" Tweak: I just adjusted the Frosted Glass to be much subtler (less blur, lower opacity) so the image is still clearly visible underneath the frost.
+-----------------------------------------
+
+### Update 17 Aug 2026 Add Template images.
+------------------------------------------
 ### Update 18 Aug 2026 Fix bug.
 
 	1	100% WYSIWYG (What You See Is What You Get): We completely rebuilt the preview system. The live preview now uses the exact same Canvas API math as the download engine. The border thickness (Thin/Medium/Thick) you see on screen is exactly what you get in the downloaded PNG.
