@@ -13,6 +13,7 @@
 	1	Export Padding: We added a slider in the center column that allows you to shrink the icon and add transparent space around it. We initially tried adding Aspect Ratios (Banners, GitHub, HD) but you decided you only wanted the 1:1 square padding, so we stripped out the rest to keep it clean!
 	2	Inner Glow & Vignette: We filled the remaining space in the center column by adding 6 new glow options (White Glow, Dark Vignette, Cyan, Gold, Purple) that radiate beautifully from the center outward.
 	3	"UI Optimization" We tightened all the gaps, margins, and padding in the CSS so the entire app fits perfectly onto a 1080p screen without needing to scroll!.
+        4	Fixed a bug when using Scale and (Inner Glow & Vignette) together.
 -----------------------------------------
 
 ### Update 16 Aug 2026 Add Film Grain Effect, Frosted Glass Effect, Low Frosty" Tweak
